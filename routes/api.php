@@ -26,3 +26,10 @@ Route::put('abogados/{abogado_id}', 'AbogadosController@update');
 Route::delete('abogados/{abogado_id}', 'AbogadosController@delete');
 
 Route::get('abogados/especialidad', 'EspecialidadController@getPorEspecialidad');
+
+
+Route::get('calificaciones', 'CalificacionController@getAll');
+Route::get('abogados/{abogado_id}/calificaciones', 'CalificacionController@getPorAbogado');
+Route::post('calificaciones', 'CalificacionController@create');
+
+Route::post('citas', 'CitaController@create');

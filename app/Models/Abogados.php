@@ -27,4 +27,12 @@ class Abogados extends Model
     {
         return $this->hasMany(Especialidad::class, "abogado_id");
     }
+    public function calificaciones()
+    {
+        return $this->hasMany(calificacion::class, "abogado_id");
+    }
+    public function citas()
+    {
+        return $this->hasMany(Cita::class, "abogado_id");
+    }
 }

@@ -39,4 +39,14 @@ class User extends Authenticatable
         'updated_at' => 'datetime',
 
     ];
+    // relations
+
+    public function calificaciones()
+    {
+        return $this->hasMany(calificacion::class, "usuario_id");
+    }
+    public function citas()
+    {
+        return $this->hasMany(Cita::class, "usuario_id");
+    }
 }
