@@ -20,4 +20,18 @@ class EspecialidadController extends Controller
             return Res::withoutData("Error", 400);
         }
     }
+    public function getEspecialidades()
+    {
+        try {
+            $especialidades = Especialidad::select("especialidad")->groupBy("especialidad")->get();
+            $especialidadesArr = [];
+            foreach ($especialidades as $e) {
+                $especialidadesArr[] = $e["especialidad"];
+            }
+            return Res::withData($especialidadesArr, "especialidades", 200);
+        } catch (\Throwable $th) {
+            error_log($th);
+            return Res::withoutData("Error", 400);
+        }
+    }
 }

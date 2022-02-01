@@ -21,11 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('usuarios', 'UserController@getAll');
 
 Route::get('abogados', 'AbogadosController@getAll');
+Route::get('ciudades', 'AbogadosController@getCiudades');
+
 Route::post('abogados', 'AbogadosController@create');
 Route::put('abogados/{abogado_id}', 'AbogadosController@update');
 Route::delete('abogados/{abogado_id}', 'AbogadosController@delete');
 
 Route::get('abogados/especialidad', 'EspecialidadController@getPorEspecialidad');
+Route::get('especialidades', 'EspecialidadController@getEspecialidades');
+
 
 
 Route::get('calificaciones', 'CalificacionController@getAll');
