@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 
 class AbogadosController extends Controller
 {
-    public function getAll()
+    public function getAll(Request $request)
     {
-        $abogados = Abogados::all();
+        $especialidad = $request->query("especialidad");
+        $ciudad = $request->query("ciudad");
+        if (!$especialidad && !$ciudad) {
+            $abogados = Abogados::all();
+        } else {
+            $abogados = Abogados::where("ciudad", "like", $ciudad ? $ciudad : "%%")
+                ->whereRelation("especialidades", "especialidad", "like", $especialidad ? $especialidad : "%%")->get();
+        }
         return Res::withData($abogados, "abogados", 200);
     }
     public function create(Request $request)
