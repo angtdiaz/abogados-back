@@ -18,6 +18,7 @@ class AbogadosController extends Controller
     {
         try {
             $abogado = Abogados::create($request->all());
+            $abogado->especialidades()->createMany($request->especialidades);
             return Res::withData($abogado, "abogado creado con exito", 200);
         } catch (\Throwable $th) {
             error_log($th);
