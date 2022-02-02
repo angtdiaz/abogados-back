@@ -20,6 +20,7 @@ class Cita extends Model
         'updated_at' => 'datetime',
     ];
 
+    protected $with = ["abogado"];
     public function usuario()
     {
         return $this->belongsTo(User::class, "usuario_id");

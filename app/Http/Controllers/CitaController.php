@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cita;
+use App\Models\User;
 use App\Utils\Res;
 use Illuminate\Http\Request;
 
 class CitaController extends Controller
 {
-    public function getAll()
+    public function getAll($usuario_id)
     {
-        $citas = Cita::all();
-        return Res::withData($citas, "citas", 200);
+        $user = User::find($usuario_id);
+        if ($user) {
+            $citas = $user->citas;
+            return Res::withData($citas, "citas", 200);
+        }
+        return Res::withData([], "citas", 200);
     }
     public function create(Request $request)
     {
@@ -26,6 +31,19 @@ class CitaController extends Controller
         } catch (\Throwable $th) {
             error_log($th);
             return Res::withoutData("Error", 400);
+        }
+    }
+    public function eliminar($cita_id)
+    {
+        try {
+            $cita = Cita::find($cita_id);
+            if ($cita) {
+                $cita->delete();
+                return Res::withoutData("cita borrada", 200);
+            }
+        } catch (\Throwable $th) {
+            error_log($th);
+            return Res::withoutData("cita no borrada", 200);
         }
     }
 }

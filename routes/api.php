@@ -37,3 +37,5 @@ Route::get('abogados/{abogado_id}/calificaciones', 'CalificacionController@getPo
 Route::post('calificaciones', 'CalificacionController@create');
 
 Route::post('citas', 'CitaController@create');
+Route::get('citas/{usuario_id}', 'CitaController@getAll');
+Route::delete('citas/{cita_id}', 'CitaController@eliminar');
